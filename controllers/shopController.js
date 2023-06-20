@@ -1,84 +1,86 @@
-const fs = require('fs');
+const Item = require('./../models/itemModel');
 
-const items = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/items.json`));
-
-exports.checkID = (req, res, next, val) => {
-  console.log(`Item id is: ${val}`);
-
-  if (req.params.id * 1 > items.length) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'Invalid ID',
-    });
-  }
-  next();
-};
-
-exports.checkBody = (req, res, next) => {
-  if (!req.body.productName || !req.body.price) {
-    return res.status(400).json({
-      status: 'fail',
-      message: 'Missing product name or price',
-    });
-  }
-  next();
-};
-
-exports.getAllItems = (req, res) => {
-  console.log(req.requestTime);
-
-  res.status(200).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    results: items.length,
-    data: {
-      items,
-    },
-  });
-};
-
-exports.getItem = (req, res) => {
-  console.log(req.params);
-  const id = req.params.id * 1;
-
-  const item = items.find((el) => el.id === id);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      item,
-    },
-  });
-};
-
-exports.createItem = (req, res) => {
-  const newId = items[items.length - 1].id + 1;
-  const newItem = Object.assign({ id: newId }, req.body);
-
-  items.push(newItem);
-
-  fs.writeFile(`${__dirname}/dev-data/data.json`, JSON.stringify(items), (err) => {
-    res.status(201).json({
-      status: 'success',
-      data: {
-        item: newItem,
+exports.getAllItems = async (req, res) => {
+  try {
+    const items = await Item.find();
+    res.status(200).json({
+      Status: 'success',
+      Results: items.length,
+      Data: {
+        Items: items,
       },
     });
-  });
+  } catch (err) {
+    res.status(404).json({
+      Status: 'fail',
+      Message: err,
+    });
+  }
 };
 
-exports.updateItem = (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      item: '<Updated item here...>',
-    },
-  });
+exports.getItem = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+    res.status(200).json({
+      Status: 'success',
+      Data: {
+        Item: item,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      Status: 'fail',
+      Message: err,
+    });
+  }
 };
 
-exports.deleteItem = (req, res) => {
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
+exports.createItem = async (req, res) => {
+  try {
+    const newItem = await Item.create(req.body);
+    res.status(201).json({
+      Status: 'success',
+      Item: newItem,
+    });
+  } catch (err) {
+    res.status(400).json({
+      Status: 'fail',
+      Message: err,
+    });
+  }
+};
+
+exports.updateItem = async (req, res) => {
+  try {
+    const newItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({
+      Status: 'success',
+      Data: {
+        Item: newItem,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      Status: 'fail',
+      Message: err,
+    });
+  }
+};
+
+exports.deleteItem = async (req, res) => {
+  try {
+    await Item.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      Status: 'success',
+      Data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      Status: 'fail',
+      Message: err,
+    });
+  }
 };
