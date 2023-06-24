@@ -7,6 +7,10 @@ const router = express.Router();
 
 router.route('/').get(authController.protect, shopController.getAllItems).post(shopController.createItem);
 
-router.route('/:id').get(shopController.getItem).patch(shopController.updateItem).delete(shopController.deleteItem);
+router
+  .route('/:id')
+  .get(shopController.getItem)
+  .patch(shopController.updateItem)
+  .delete(authController.protect, authController.restrict, shopController.deleteItem);
 
 module.exports = router;

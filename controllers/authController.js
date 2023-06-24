@@ -79,3 +79,10 @@ exports.protect = async (req, res, next) => {
     });
   }
 };
+
+exports.restrict = (req, res, next) => {
+  if (req.user.role != 'admin') {
+    return next(new AppError('You do not have pemission to this action'), 403);
+  }
+  next();
+};
