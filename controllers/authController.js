@@ -1,3 +1,4 @@
+const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const AppError = require('./../utils/appError');
@@ -47,6 +48,30 @@ exports.login = async (req, res, next) => {
       status: 'success',
       token,
     });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: err.message,
+    });
+  }
+};
+
+exports.protect = async (req, res, next) => {
+  try {
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+    if (!token) {
+      return next(new AppError('You are not logged in! Please log in to get access', 401));
+    }
+    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return next(new AppError('The user belonging to this token does no longer exist', 401));
+    }
+    req.user = user;
+    next();
   } catch (err) {
     res.status(400).json({
       status: 'fail',
