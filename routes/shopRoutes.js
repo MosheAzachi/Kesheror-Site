@@ -7,12 +7,15 @@ const router = express.Router();
 
 router.route('/items-on-sale').get(shopController.getItemsOnSale);
 
-router.route('/').get(authController.protect, shopController.getAllItems).post(shopController.createItem);
+router
+  .route('/')
+  .get(authController.protect, shopController.getAllItems)
+  .post(authController.protect, authController.restrict, shopController.createItem);
 
 router
   .route('/:id')
   .get(shopController.getItem)
-  .patch(shopController.updateItem)
+  .patch(authController.protect, authController.restrict, shopController.updateItem)
   .delete(authController.protect, authController.restrict, shopController.deleteItem);
 
 module.exports = router;
