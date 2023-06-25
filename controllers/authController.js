@@ -5,6 +5,17 @@ const User = require('./../models/userModel');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
 
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user: user,
+    },
+  });
+};
+
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
@@ -19,14 +30,7 @@ exports.signup = async (req, res, next) => {
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm,
     });
-    const token = signToken(newUser._id);
-    res.status(201).json({
-      status: 'success',
-      token,
-      data: {
-        User: newUser,
-      },
-    });
+    createSendToken(newUser, 201, res);
   } catch (err) {
     res.status(400).json({
       status: 'fail',
@@ -45,11 +49,7 @@ exports.login = async (req, res, next) => {
     if (!user || !(await user.correctPassword(password, user.password))) {
       return next(new AppError('Incorrect email or password', 401));
     }
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token,
-    });
+    createSendToken(user, 200, res);
   } catch (err) {
     res.status(400).json({
       status: 'fail',
@@ -135,11 +135,7 @@ exports.resetPassword = async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save();
-    const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token,
-    });
+    createSendToken(user, 200, res);
   } catch (err) {
     res.status(400).json({
       status: 'fail',
