@@ -1,8 +1,10 @@
 const Item = require('./../models/itemModel');
+const APIFeatures = require('./../utils/apiFeatures');
 
 exports.getAllItems = async (req, res) => {
   try {
-    const items = await Item.find();
+    const features = new APIFeatures(Item.find(), req.query).filter().sort();
+    const items = await features.query;
     res.status(200).json({
       status: 'success',
       results: items.length,
@@ -21,6 +23,9 @@ exports.getAllItems = async (req, res) => {
 exports.getItem = async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);
+    if (!item) {
+      return next(new AppError('No item found with that ID', 404));
+    }
     res.status(200).json({
       status: 'success',
       data: {
@@ -28,7 +33,7 @@ exports.getItem = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(404).json({
+    res.status(400).json({
       status: 'fail',
       message: err,
     });
