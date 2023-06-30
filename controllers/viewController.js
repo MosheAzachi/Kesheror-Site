@@ -59,3 +59,24 @@ exports.getContact = (req, res) => {
     activePage: req.path,
   });
 };
+
+exports.getPersonal = (req, res) => {
+  res.status(200).render('personal', {
+    title: 'אזור אישי',
+    activePage: req.path,
+  });
+};
+
+exports.createNewProduct = (req, res) => {
+  res.status(200).render('product', {
+    title: 'יצירת מוצר',
+    activePage: req.path,
+  });
+};
+
+exports.createNewUser = (req, res) => {
+  res.status(200).render('user', {
+    title: 'יצירת משתמש',
+    activePage: req.path,
+  });
+};

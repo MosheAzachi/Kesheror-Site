@@ -1,0 +1,25 @@
+extends base
+
+block content
+    div.block
+        if user
+            if user.role === 'admin'
+                h1 אזור אישי - אדמין
+                p 
+                    a(href='/new-product') יצירת מוצר חדש
+                    br
+                    a(href='/new-user') יצירת משתמש חדש
+                    br
+                    a(href='/get-users') הצגת כלל המשתמשים
+                    br
+                    a(href='/new-user') עדכון פרטי משתמש
+                    br
+                    a(href='/new-user') עדכון פרטי מוצר
+            else
+                h1 אזור אישי - יוזר
+                p 
+                    a(href='/get-users') הצגת ההזמנות שביצעת
+        else
+            h1 שגיאה
+            p אנא חזור אחורה אינך רשאי לבקר בעמוד זה !
+        <hr />

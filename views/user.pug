@@ -1,0 +1,26 @@
+extends base
+
+block content
+    div.block
+        if (user && user.role === 'admin')
+            h1 יצירת משתמש חדש
+            div.col.d-flex.justify-content-center
+                form.form.form--createUser
+                    div.form-outline.mb-4
+                        input#name.form__input(type='text' class='form-control' placeholder='שם מלא')
+                    div.form-outline.mb-4
+                        input#email.form__input(type='email' class='form-control' placeholder='אימייל')
+                    div.form-outline.mb-4
+                        input#password.form__input(type='password' class='form-control' placeholder='סיסמא')
+                    div.form-outline.mb-4
+                        input#passwordConfirm.form__input(type='password' class='form-control' placeholder='סיסמא שוב')
+                    div.form-outline.mb-4
+                        select#role.form__select(class='form-control')
+                            option(value='' selected disabled) בחר אופציה (יוזר או אדמין)
+                            option(value='user') יוזר
+                            option(value='admin') אדמין
+                    button.btn.btn-primary.btn-block.mb-4 הרשמה
+        else
+            h1 שגיאה
+            p אנא חזור אחורה אינך רשאי לבקר בעמוד זה !
+        <hr />

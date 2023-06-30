@@ -15,5 +15,8 @@ router.get('/forgotpassword', viewController.getForgotPassword);
 router.get('/register', viewController.getRegister);
 router.get('/store', viewController.getStore);
 router.get('/contact', viewController.getContact);
+router.get('/personal', viewController.getPersonal);
+router.get('/new-product', viewController.createNewProduct);
+router.get('/new-user', viewController.createNewUser);
 
 module.exports = router;
