@@ -1,0 +1,19 @@
+nav.navbar
+    div.login
+        if user
+            a.nav_el.nav__el--logout התנתק
+            a.nav_el(href='#') אזור אישי
+        else
+            a.nav_el(href='/login') התחברות
+            a.nav_el(href='/register') הרשמה
+div.navbar-brand-wrap
+    div.navbar-brand
+        img(src='images/logo.png' alt='Logo')
+div.topnav#myTopnav
+    a(href='/' class=(activePage === '/' ? 'active' : '')) דף הבית
+    a(href='profile' class=(activePage === '/profile' ? 'active' : '')) פרופיל
+    a(href='gallery' class=(activePage === '/gallery' ? 'active' : '')) גלריה
+    a(href='store' class=(activePage === '/store' ? 'active' : '')) חנות
+    a(href='contact' class=(activePage === '/contact' ? 'active' : '')) צור קשר
+    a(href='javascript:void(0);', class='icon', onclick='myFunction()')
+        i.fa.fa-bars

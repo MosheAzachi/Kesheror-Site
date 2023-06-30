@@ -1,0 +1,25 @@
+extends base
+
+block content
+    div.block
+        h1 התחברות
+        div.col.d-flex.justify-content-center
+            form.form.form--login
+                div.form-outline.mb-4
+                    input#email.form__input(type='email' class='form-control' placeholder='אימייל')
+                div.form-outline.mb-4
+                    input#password.form__input(type='password' class='form-control' placeholder='סיסמא')
+                div.row.mb-4
+                    div.col.d-flex.justify-content-center
+                        div.form-check
+                            input(type="checkbox", class="form-check-input", id="form2Example31", value="", checked)
+                            label.form-check-label(for="form2Example31") זכור אותי
+                    div.col
+                        a(href="/forgotpassword") שכחת סיסמא?
+                button.btn.btn-primary.btn-block.mb-4 התחברות
+                div.text-center
+                    p
+                        | לא משתמש? 
+                        a(href="/register") הירשם
+        hr
+        
