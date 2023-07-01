@@ -23,11 +23,6 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  console.log(req.cookies);
-  next();
-});
-
 app.use('/', viewRouter);
 app.use('/api/items', shopRouter);
 app.use('/api/users', userRouter);

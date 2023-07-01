@@ -215,3 +215,16 @@ body {
   cursor: pointer;
   border-radius: 7px;
 }
+
+.adminAlignLeft {
+  text-align: right;
+}
+
+.adminAlignLeft input {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.btnBottom {
+  margin-bottom: 10px;
+}

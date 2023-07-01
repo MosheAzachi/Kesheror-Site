@@ -1,0 +1,31 @@
+extends base
+
+block content
+    div.block
+        if (user && user.role === 'admin')
+            h1 משתמשים באתר
+            div.catalog
+                each user in users
+                    .item
+                        .adminAlignLeft
+                            p
+                                b מס סידורי: 
+                                | #{user._id}
+                                br
+                                b שם משתמש: 
+                                input(type='text', id=`usernameInput-${user._id}`, value=user.name)
+                                br
+                                b אימייל: 
+                                input(type='email', id=`emailInput-${user._id}`, value=user.email)
+                                br
+                                b סוג משתמש: 
+                                select(id=`roleSelect-${user._id}`)
+                                    option(value='user', selected=user.role === 'user') יוזר
+                                    option(value='admin', selected=user.role === 'admin') אדמין
+                        .center
+                            button.btnBottom.nav_el(onclick=`deleteUserFunc('${user._id}')`) מחק
+                            button.btnBottom.nav_el(onclick=`updateUserFunc('${user._id}')`) עדכון
+        else
+            h1 שגיאה
+            p אנא חזור אחורה אינך רשאי לבקר בעמוד זה !
+        <hr />

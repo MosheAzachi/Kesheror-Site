@@ -1,4 +1,5 @@
 const Item = require('./../models/itemModel');
+const User = require('./../models/userModel');
 
 exports.getOverview = (req, res) => {
   res.status(200).render('home', {
@@ -67,8 +68,8 @@ exports.getPersonal = (req, res) => {
   });
 };
 
-exports.createNewProduct = (req, res) => {
-  res.status(200).render('product', {
+exports.createNewItem = (req, res) => {
+  res.status(200).render('item', {
     title: 'יצירת מוצר',
     activePage: req.path,
   });
@@ -77,6 +78,24 @@ exports.createNewProduct = (req, res) => {
 exports.createNewUser = (req, res) => {
   res.status(200).render('user', {
     title: 'יצירת משתמש',
+    activePage: req.path,
+  });
+};
+
+exports.getAllUsers = async (req, res) => {
+  const users = await User.find();
+  res.status(200).render('users', {
+    title: 'משתמשים',
+    users: users,
+    activePage: req.path,
+  });
+};
+
+exports.getAllItems = async (req, res) => {
+  const items = await Item.find();
+  res.status(200).render('items', {
+    title: 'מוצרים',
+    items: items,
     activePage: req.path,
   });
 };
