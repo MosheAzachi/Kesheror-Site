@@ -44,14 +44,12 @@ exports.getRegister = (req, res) => {
 };
 
 exports.getStore = async (req, res, next) => {
-  try {
-    const items = await Item.find();
-    res.status(200).render('store', {
-      title: 'חנות',
-      items: items,
-      activePage: req.path,
-    });
-  } catch (err) {}
+  const items = await Item.find();
+  res.status(200).render('store', {
+    title: 'חנות',
+    items: items,
+    activePage: req.path,
+  });
 };
 
 exports.getContact = (req, res) => {
@@ -95,6 +93,15 @@ exports.getAllItems = async (req, res) => {
   const items = await Item.find();
   res.status(200).render('items', {
     title: 'מוצרים',
+    items: items,
+    activePage: req.path,
+  });
+};
+
+exports.getAllOrders = async (req, res) => {
+  const items = await Item.find();
+  res.status(200).render('orders', {
+    title: 'הזמנות',
     items: items,
     activePage: req.path,
   });

@@ -17,22 +17,6 @@ const itemSchema = new mognoose.Schema({
     type: String,
     required: [true, 'A new item in the shop must have price!'],
   },
-  sale: {
-    type: Boolean,
-    default: false,
-  },
-  salePrecentOff: {
-    type: String,
-    default: 0,
-    validate: {
-      validator: function (val) {
-        if (this.sale === true) {
-          return val > 0;
-        }
-      },
-      message: 'Enter sale%',
-    },
-  },
 });
 
 const Item = mognoose.model('Item', itemSchema);

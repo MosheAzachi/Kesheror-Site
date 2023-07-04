@@ -89,30 +89,3 @@ exports.deleteItem = async (req, res) => {
     });
   }
 };
-
-exports.getItemsOnSale = async (req, res, next) => {
-  try {
-    const stats = await Item.aggregate([
-      {
-        $match: { sale: true },
-      },
-      {
-        $group: {
-          _id: null, // Use null to calculate the sum across all items
-          numItemsOnSale: { $sum: 1 }, // Calculate the sum by incrementing 1 for each matching item
-        },
-      },
-    ]);
-    res.status(200).json({
-      Status: 'success',
-      Data: {
-        stats,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};

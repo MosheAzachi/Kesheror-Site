@@ -1,0 +1,15 @@
+extends base
+
+block content
+    div.block
+        if user
+            if user.role === 'admin'
+                h1 הזמנות - אדמין
+                p טקסט
+            else
+                h1 הזמנות - משתמש
+                p  טקסט
+        else
+            h1 שגיאה
+            p אנא חזור אחורה אינך רשאי לבקר בעמוד זה !
+        <hr />

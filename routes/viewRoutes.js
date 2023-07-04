@@ -20,5 +20,6 @@ router.get('/new-product', viewController.createNewItem);
 router.get('/new-user', viewController.createNewUser);
 router.get('/get-users', viewController.getAllUsers);
 router.get('/get-items', viewController.getAllItems);
+router.get('/get-orders', viewController.getAllOrders);
 
 module.exports = router;

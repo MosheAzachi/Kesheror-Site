@@ -24,28 +24,7 @@ body {
   margin-right: 10px;
 }
 
-.navbar input {
-  padding: 3px;
-  margin-left: 4px;
-  border: 1px solid #ccc;
-  width: 240px; /* adjust as needed (as long as it doesn't break the topnav) */
-}
-
-.navbar .button {
-  padding: 3px;
-  background: #ddd;
-  color: black;
-  border: none;
-  cursor: pointer;
-}
-
 @media screen and (max-width: 600px) {
-  .navbar input,
-  .topnav .button {
-    display: block;
-    width: 100%;
-    margin-bottom: 5px;
-  }
   .navbar-brand img {
     width: 80%;
     margin: auto;
@@ -227,4 +206,25 @@ body {
 
 .btnBottom {
   margin-bottom: 10px;
+}
+
+.shopping {
+  margin-left: 15px;
+}
+
+.shopping img {
+  width: 40px;
+}
+
+.shopping span {
+  background: rgb(246, 23, 23);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  display: flex;
+  left: 46px;
+  top: 5px;
+  position: absolute;
+  padding: 0.4px 9px;
 }
