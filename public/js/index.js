@@ -16,27 +16,29 @@ if (register) {
 }
 
 registerFunc = async (name, email, password, passwordConfirm) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://127.0.0.1:4000/api/users/signup',
-      data: {
-        name: name,
-        email: email,
-        password: password,
-        passwordConfirm: passwordConfirm
+  $.ajax({
+    url: 'http://127.0.0.1:4000/api/users/signup',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirm: passwordConfirm
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('נרשמת בהצלחה לאתר!');
+        window.setTimeout(function() {
+          location.assign('/');
+        }, 1000);
       }
-    });
-    if (res.data.status === 'success') {
-      alert('נרשמת בהצלחה לאתר!');
-      window.setTimeout(() => {
-        location.assign('/');
-      }, 1000);
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 if (loginForm) {
@@ -49,38 +51,43 @@ if (loginForm) {
 }
 
 login = async (email, password) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://127.0.0.1:4000/api/users/login',
-      data: {
-        email,
-        password
+  $.ajax({
+    url: 'http://127.0.0.1:4000/api/users/login',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      email: email,
+      password: password
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('התחברת בהצלחה לאתר!');
+        window.setTimeout(function() {
+          location.assign('/');
+        }, 1000);
       }
-    });
-    if (res.data.status === 'success') {
-      alert('התחברת בהצלחה לאתר!');
-      window.setTimeout(() => {
-        location.assign('/');
-      }, 1000);
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 if (logOutBtn) {
   logOutBtn.addEventListener('click', async () => {
-    try {
-      const res = await axios({
-        method: 'GET',
-        url: 'http://127.0.0.1:4000/api/users/logout'
-      });
-      if ((res.data.status = 'success')) location.reload(true);
-    } catch (err) {
-      alert(err.response.data.message);
-    }
+    $.ajax({
+      url: 'http://127.0.0.1:4000/api/users/logout',
+      type: 'GET',
+      success: function(data) {
+        if (data.status === 'success') {
+          location.reload(true);
+        }
+      },
+      error: function(xhr, status, error) {
+        alert(xhr.responseJSON.message);
+      }
+    });
   });
 }
 
@@ -96,26 +103,28 @@ if (newItem) {
 }
 
 createItem = async (productImage, productName, productDescription, productPrice) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://127.0.0.1:4000/api/items',
-      data: {
-        image: productImage,
-        productName: productName,
-        description: productDescription,
-        price: productPrice
+  $.ajax({
+    url: 'http://127.0.0.1:4000/api/items',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      image: productImage,
+      productName: productName,
+      description: productDescription,
+      price: productPrice
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('מוצר נוצר בהצלחה!');
+        window.setTimeout(function() {
+          location.assign('/personal');
+        }, 1000);
       }
-    });
-    if (res.data.status === 'success') {
-      alert('מוצר נוצר בהצלחה!');
-      window.setTimeout(() => {
-        location.assign('/personal');
-      }, 1000);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 if (newUser) {
@@ -131,28 +140,29 @@ if (newUser) {
 }
 
 createUser = async (name, email, password, passwordConfirm, role) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      url: 'http://127.0.0.1:4000/api/users/',
-      data: {
-        name: name,
-        email: email,
-        password: password,
-        passwordConfirm: passwordConfirm,
-        role: role
+  $.ajax({
+    url: 'http://127.0.0.1:4000/api/users/',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      name: name,
+      email: email,
+      password: password,
+      passwordConfirm: passwordConfirm,
+      role: role
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('משתמש נוצר בהצלחה!');
+        window.setTimeout(function() {
+          location.assign('/personal');
+        }, 1000);
       }
-    });
-    if (res.data.status === 'success') {
-      alert('משתמש נוצר בהצלחה!');
-      window.setTimeout(() => {
-        location.assign('/personal');
-      }, 1000);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 function deleteUserFunc(ID) {
@@ -160,19 +170,20 @@ function deleteUserFunc(ID) {
 }
 
 deleteUser = async ID => {
-  try {
-    const res = await axios({
-      method: 'DELETE',
-      url: `http://127.0.0.1:4000/api/users/${ID}`
-    });
-    if (!res.data) {
-      alert('משתמש נמחק בהצלחה!');
-      window.location.reload();
+  $.ajax({
+    url: `http://127.0.0.1:4000/api/users/${ID}`,
+    type: 'DELETE',
+    success: function(data) {
+      if (!data) {
+        alert('משתמש נמחק בהצלחה!');
+        window.location.reload();
+      }
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 function deleteItemFunc(ID) {
@@ -180,19 +191,20 @@ function deleteItemFunc(ID) {
 }
 
 deleteItem = async ID => {
-  try {
-    const res = await axios({
-      method: 'DELETE',
-      url: `http://127.0.0.1:4000/api/items/${ID}`
-    });
-    if (!res.data) {
-      alert('מוצר נמחק בהצלחה!');
-      window.location.reload();
+  $.ajax({
+    url: `http://127.0.0.1:4000/api/items/${ID}`,
+    type: 'DELETE',
+    success: function(data) {
+      if (!data) {
+        alert('מוצר נמחק בהצלחה!');
+        window.location.reload();
+      }
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 function updateUserFunc(ID) {
@@ -203,26 +215,28 @@ function updateUserFunc(ID) {
 }
 
 updateUser = async (ID, name, email, role) => {
-  try {
-    const res = await axios({
-      method: 'PATCH',
-      url: `http://127.0.0.1:4000/api/users/${ID}`,
-      data: {
-        name: name,
-        email: email,
-        role: role
+  $.ajax({
+    url: `http://127.0.0.1:4000/api/users/${ID}`,
+    type: 'PATCH',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      name: name,
+      email: email,
+      role: role
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('המשתמש עודכן בהצלחה!');
+        window.setTimeout(function() {
+          location.assign('/get-users');
+        }, 1000);
       }
-    });
-    if (res.data.status === 'success') {
-      alert('המשתמש עודכן בהצלחה!');
-      window.setTimeout(() => {
-        location.assign('/get-users');
-      }, 1000);
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
 
 function updateItemFunc(ID) {
@@ -234,25 +248,27 @@ function updateItemFunc(ID) {
 }
 
 updateItem = async (ID, name, price, description, image) => {
-  try {
-    const res = await axios({
-      method: 'PATCH',
-      url: `http://127.0.0.1:4000/api/items/${ID}`,
-      data: {
-        productName: name,
-        price: price,
-        description: description,
-        image: image
+  $.ajax({
+    url: `http://127.0.0.1:4000/api/items/${ID}`,
+    type: 'PATCH',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      productName: name,
+      price: price,
+      description: description,
+      image: image
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('המוצר עודכן בהצלחה!');
+        window.setTimeout(function() {
+          location.assign('/get-items');
+        }, 1000);
       }
-    });
-    if (res.data.status === 'success') {
-      alert('המוצר עודכן בהצלחה!');
-      window.setTimeout(() => {
-        location.assign('/get-items');
-      }, 1000);
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
     }
-    console.log(res.data.status);
-  } catch (err) {
-    alert(err.response.data.message);
-  }
+  });
 };
