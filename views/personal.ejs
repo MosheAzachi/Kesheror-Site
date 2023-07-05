@@ -1,0 +1,29 @@
+<% extend('base') %>
+
+<div class="block">
+    <% if (locals.user) { %>
+        <% if (locals.user.role === 'admin') { %>
+            <h1>אזור אישי - אדמין</h1>
+            <p>
+                <a href="/new-product">יצירת מוצר חדש</a>
+                <br>
+                <a href="/new-user">יצירת משתמש חדש</a>
+                <br>
+                <a href="/get-users">הצגת כלל המשתמשים</a>
+                <br>
+                <a href="/get-items">הצגת כלל המוצרים</a>
+                <br>
+                <a href="/get-orders">הצגת כלל ההזמנות</a>
+            </p>
+        <% } else { %>
+            <h1>אזור אישי - יוזר</h1>
+            <p>
+                <a href="/get-orders">הצגת ההזמנות שביצעת</a>
+            </p>
+        <% } %>
+    <% } else { %>
+        <h1>שגיאה</h1>
+        <p>אנא חזור אחורה אינך רשאי לבקר בעמוד זה !</p>
+    <% } %>
+    <hr />
+</div>

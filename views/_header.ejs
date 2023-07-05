@@ -1,0 +1,32 @@
+<nav class="navbar">
+    <div class="login">
+        <% if (locals.user) { %>
+            <a class="nav_el nav__el--logout">התנתק</a>
+            <a class="nav_el" href="/personal">אזור אישי</a>
+        <%} else { %>
+            <a class="nav_el" href="/login">התחברות</a>
+            <a class="nav_el" href="/register">הרשמה</a>
+        <% } %>
+    </div>
+    <% if (locals.user) { %>
+        <div class="shopping">
+            <span class="quantity">0</span>
+            <img src="images/shopping.svg">
+        </div>
+    <% } %>
+</nav>
+<div class="navbar-brand-wrap">
+    <div class="navbar-brand">
+        <img src="images/logo.png" alt="Logo">
+    </div>
+</div>
+<div class="topnav" id="myTopnav">
+    <a href="/" class="<%= activePage === '/' ? 'active' : '' %>">דף הבית</a>
+    <a href="profile" class="<%= activePage === '/profile' ? 'active' : '' %>">פרופיל</a>
+    <a href="gallery" class="<%= activePage === '/gallery' ? 'active' : '' %>">גלריה</a>
+    <a href="store" class="<%= activePage === '/store' ? 'active' : '' %>">חנות מוצרים</a>
+    <a href="contact" class="<%= activePage === '/contact' ? 'active' : '' %>">צור קשר</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars" style="font-size:25.5px"></i>
+    </a>
+</div>

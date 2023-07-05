@@ -1,0 +1,28 @@
+<% extend('base') %>
+
+<div class="block">
+    <% if (locals.user && locals.user.role === 'admin') { %>
+        <h1>יצירת מוצר חדש</h1>
+        <div class="col d-flex justify-content-center">
+            <form class="form form--newProduct">
+                <div class="form-outline mb-4">
+                    <input id="productImage" class="form__input form-control" type="text" placeholder="נתיב תמונה">
+                </div>
+                <div class="form-outline mb-4">
+                    <input id="productName" class="form__input form-control" type="text" placeholder="שם מוצר">
+                </div>
+                <div class="form-outline mb-4">
+                    <input id="productDescription" class="form__input form-control" type="text" placeholder="תיאור מוצר">
+                </div>
+                <div class="form-outline mb-4">
+                    <input id="productPrice" class="form__input form-control" type="number" placeholder="מחיר">
+                </div>
+                <button class="btn btn-primary btn-block mb-4">יצירת מוצר חדש</button>
+            </form>
+        </div>
+    <% } else { %>
+        <h1>שגיאה</h1>
+        <p>אנא חזור אחורה, אינך רשאי לבקר בעמוד זה!</p>
+    <% } %>
+    <hr>
+</div>

@@ -7,21 +7,21 @@ const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
   res.cookie('jwt', token, {
     expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-    httpOnly: true,
+    httpOnly: true
   });
   user.password = undefined;
   res.status(statusCode).json({
     status: 'success',
     token,
     data: {
-      user: user,
-    },
+      user: user
+    }
   });
 };
 
-const signToken = (id) => {
+const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+    expiresIn: process.env.JWT_EXPIRES_IN
   });
 };
 
@@ -31,13 +31,13 @@ exports.signup = async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      passwordConfirm: req.body.passwordConfirm,
+      passwordConfirm: req.body.passwordConfirm
     });
     createSendToken(newUser, 201, res);
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err.message,
+      message: err.message
     });
   }
 };
@@ -56,7 +56,7 @@ exports.login = async (req, res, next) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err.message,
+      message: err.message
     });
   }
 };
@@ -64,7 +64,7 @@ exports.login = async (req, res, next) => {
 exports.logout = (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true,
+    httpOnly: true
   });
   res.status(200).json({ status: 'success' });
 };
@@ -90,7 +90,7 @@ exports.protect = async (req, res, next) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err.message,
+      message: err.message
     });
   }
 };

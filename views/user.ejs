@@ -1,0 +1,35 @@
+<% extend('base') %>
+
+<div class="block">
+    <% if (locals.user && locals.user.role === 'admin') { %>
+        <h1>יצירת משתמש חדש</h1>
+        <div class="col d-flex justify-content-center">
+            <form class="form form--createUser">
+                <div class="form-outline mb-4">
+                    <input id="name" class="form__input form-control" type="text" placeholder="שם מלא">
+                </div>
+                <div class="form-outline mb-4">
+                    <input id="email" class="form__input form-control" type="email" placeholder="אימייל">
+                </div>
+                <div class="form-outline mb-4">
+                    <input id="password" class="form__input form-control" type="password" placeholder="סיסמא">
+                </div>
+                <div class="form-outline mb-4">
+                    <input id="passwordConfirm" class="form__input form-control" type="password" placeholder="סיסמא שוב">
+                </div>
+                <div class="form-outline mb-4">
+                    <select id="role" class="form__select form-control">
+                        <option value="" selected disabled>בחר אופציה (יוזר או אדמין)</option>
+                        <option value="user">יוזר</option>
+                        <option value="admin">אדמין</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block mb-4">הרשמה</button>
+            </form>
+        </div>
+    <% } else { %>
+        <h1>שגיאה</h1>
+        <p>אנא חזור אחורה אינך רשאי לבקר בעמוד זה!</p>
+    <% } %>
+    <hr>
+</div>

@@ -1,0 +1,36 @@
+<% extend('base') %>
+
+<div class="block">
+    <% if (locals.user && locals.user.role === 'admin') { %>
+        <h1>משתמשים באתר</h1>
+        <div class="catalog">
+            <% users.forEach(user => { %>
+                <div class="item">
+                    <div class="adminAlignLeft">
+                        <p>
+                            <b>מס סידורי:</b>
+                            <%= user._id %><br>
+                            <b>שם משתמש:</b>
+                            <input type="text" id="usernameInput-<%= user._id %>" value="<%= user.name %>"><br>
+                            <b>אימייל:</b>
+                            <input type="email" id="emailInput-<%= user._id %>" value="<%= user.email %>"><br>
+                            <b>סוג משתמש:</b>
+                            <select id="roleSelect-<%= user._id %>">
+                                <option value="user" <% if (user.role === 'user') { %>selected<% } %>>יוזר</option>
+                                <option value="admin" <% if (user.role === 'admin') { %>selected<% } %>>אדמין</option>
+                            </select>
+                        </p>
+                    </div>
+                    <div class="center">
+                        <button class="btnBottom nav_el" onclick="deleteUserFunc('<%= user._id %>')">מחק</button>
+                        <button class="btnBottom nav_el" onclick="updateUserFunc('<%= user._id %>')">עדכון</button>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    <% } else { %>
+        <h1>שגיאה</h1>
+        <p>אנא חזור אחורה אינך רשאי לבקר בעמוד זה!</p>
+    <% } %>
+    <hr>
+</div>

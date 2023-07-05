@@ -105,6 +105,7 @@ body {
   color: darkred;
   font-weight: bold;
   font-size: 29px;
+  margin-top: 15px;
 }
 
 .block p {
@@ -213,7 +214,7 @@ body {
 }
 
 .shopping img {
-  width: 40px;
+  width: 36px;
 }
 
 .shopping span {

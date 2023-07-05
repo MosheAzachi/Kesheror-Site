@@ -1,0 +1,20 @@
+<% extend('base') %>
+
+<div class="block">
+    <h1>צור קשר</h1>
+    <div class="col d-flex justify-content-center">
+        <form action="mailto:azachi.moshiko@gmail.com" method="post" enctype="text/plain">
+            <div class="form-outline mb-4">
+                <input type="text" class="form-control" placeholder="שם מלא">
+            </div>
+            <div class="form-outline mb-4">
+                <input type="email" class="form-control" placeholder="דואר אלקטרוני">
+            </div>
+            <div class="form-outline mb-4">
+                <textarea class="form-control" id="message" rows="6" required placeholder="הודעה"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">שלח הודעה</button>
+        </form>
+    </div>
+</div>
+<hr>

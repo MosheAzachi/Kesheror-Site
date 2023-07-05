@@ -10,7 +10,8 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
-app.set('view engine', 'pug');
+app.engine('ejs', require('express-ejs-extend'));
+app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);
 
 app.use(express.static(`${__dirname}/public`));

@@ -1,0 +1,30 @@
+<% extend('base') %>
+
+<div class="block">
+    <% if (locals.user && locals.user.role === 'admin') { %>
+        <h1>מוצרים באתר</h1>
+        <div class="catalog">
+            <% items.forEach(function(item) { %>
+                <div class="item">
+                    <div class="adminAlignLeft">
+                        <p>
+                            <b>מס סידורי:</b> <%= item._id %><br>
+                            <b>שם מוצר:</b> <input type="text" id="productNameInput-<%= item._id %>" value="<%= item.productName %>"><br>
+                            <b>מחיר:</b> <input type="number" id="priceInput-<%= item._id %>" value="<%= item.price %>"><br>
+                            <b>תיאור:</b> <input type="text" id="productDescriptionInput-<%= item._id %>" value="<%= item.description %>"><br>
+                            <b>תמונה:</b> <input type="text" id="imageInput-<%= item._id %>" value="<%= item.image %>">
+                        </p>
+                    </div>
+                    <div class="center">
+                        <button class="btnBottom nav_el" onclick="deleteItemFunc('<%= item._id %>')">מחק</button>
+                        <button class="btnBottom nav_el" onclick="updateItemFunc('<%= item._id %>')">עדכון</button>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h1>שגיאה</h1>
+        <p>אנא חזור אחורה, אינך רשאי לבקר בעמוד זה!</p>
+    <% } %>
+    <hr>
+</div>

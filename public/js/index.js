@@ -5,7 +5,7 @@ const newItem = document.querySelector('.form--newProduct');
 const newUser = document.querySelector('.form--createUser');
 
 if (register) {
-  document.querySelector('.form').addEventListener('submit', (e) => {
+  document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -24,8 +24,8 @@ registerFunc = async (name, email, password, passwordConfirm) => {
         name: name,
         email: email,
         password: password,
-        passwordConfirm: passwordConfirm,
-      },
+        passwordConfirm: passwordConfirm
+      }
     });
     if (res.data.status === 'success') {
       alert('נרשמת בהצלחה לאתר!');
@@ -40,7 +40,7 @@ registerFunc = async (name, email, password, passwordConfirm) => {
 };
 
 if (loginForm) {
-  document.querySelector('.form').addEventListener('submit', (e) => {
+  document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -55,8 +55,8 @@ login = async (email, password) => {
       url: 'http://127.0.0.1:4000/api/users/login',
       data: {
         email,
-        password,
-      },
+        password
+      }
     });
     if (res.data.status === 'success') {
       alert('התחברת בהצלחה לאתר!');
@@ -75,7 +75,7 @@ if (logOutBtn) {
     try {
       const res = await axios({
         method: 'GET',
-        url: 'http://127.0.0.1:4000/api/users/logout',
+        url: 'http://127.0.0.1:4000/api/users/logout'
       });
       if ((res.data.status = 'success')) location.reload(true);
     } catch (err) {
@@ -85,7 +85,7 @@ if (logOutBtn) {
 }
 
 if (newItem) {
-  document.querySelector('.form').addEventListener('submit', (e) => {
+  document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
     const productImage = document.getElementById('productImage').value;
     const productName = document.getElementById('productName').value;
@@ -104,8 +104,8 @@ createItem = async (productImage, productName, productDescription, productPrice)
         image: productImage,
         productName: productName,
         description: productDescription,
-        price: productPrice,
-      },
+        price: productPrice
+      }
     });
     if (res.data.status === 'success') {
       alert('מוצר נוצר בהצלחה!');
@@ -119,7 +119,7 @@ createItem = async (productImage, productName, productDescription, productPrice)
 };
 
 if (newUser) {
-  document.querySelector('.form').addEventListener('submit', (e) => {
+  document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -140,8 +140,8 @@ createUser = async (name, email, password, passwordConfirm, role) => {
         email: email,
         password: password,
         passwordConfirm: passwordConfirm,
-        role: role,
-      },
+        role: role
+      }
     });
     if (res.data.status === 'success') {
       alert('משתמש נוצר בהצלחה!');
@@ -159,11 +159,11 @@ function deleteUserFunc(ID) {
   deleteUser(ID);
 }
 
-deleteUser = async (ID) => {
+deleteUser = async ID => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:4000/api/users/${ID}`,
+      url: `http://127.0.0.1:4000/api/users/${ID}`
     });
     if (!res.data) {
       alert('משתמש נמחק בהצלחה!');
@@ -179,11 +179,11 @@ function deleteItemFunc(ID) {
   deleteItem(ID);
 }
 
-deleteItem = async (ID) => {
+deleteItem = async ID => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:4000/api/items/${ID}`,
+      url: `http://127.0.0.1:4000/api/items/${ID}`
     });
     if (!res.data) {
       alert('מוצר נמחק בהצלחה!');
@@ -210,8 +210,8 @@ updateUser = async (ID, name, email, role) => {
       data: {
         name: name,
         email: email,
-        role: role,
-      },
+        role: role
+      }
     });
     if (res.data.status === 'success') {
       alert('המשתמש עודכן בהצלחה!');
@@ -242,8 +242,8 @@ updateItem = async (ID, name, price, description, image) => {
         productName: name,
         price: price,
         description: description,
-        image: image,
-      },
+        image: image
+      }
     });
     if (res.data.status === 'success') {
       alert('המוצר עודכן בהצלחה!');
