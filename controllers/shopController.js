@@ -1,9 +1,9 @@
-const Product = require('../models/productModel');
+const product = require('../models/productModel');
 const APIFeatures = require('./../utils/apiFeatures');
 
 exports.getAllItems = async (req, res) => {
   try {
-    const features = new APIFeatures(Product.find(), req.query).filter().sort();
+    const features = new APIFeatures(product.find(), req.query).filter().sort();
     const items = await features.query;
     res.status(200).json({
       status: 'success',
@@ -22,7 +22,7 @@ exports.getAllItems = async (req, res) => {
 
 exports.getItem = async (req, res) => {
   try {
-    const item = await Product.findById(req.params.id);
+    const item = await product.findById(req.body.id);
     if (!item) {
       return next(new AppError('No item found with that ID', 404));
     }

@@ -1,4 +1,5 @@
 const cartRepository = require('./cartItem')
+const productDetail = require('../models/productModel');
 const productRepository = require('./shopController');
 
 exports.addItemToCart = async (req, res) => {
@@ -7,8 +8,9 @@ exports.addItemToCart = async (req, res) => {
   } = req.body;
   const quantity = Number.parseInt(req.body.quantity);
   try {
-    const cart = await cartRepository.cart();
-    const productDetails = await productRepository.getItem(productId);
+    let cart = await cartRepository.cart();
+    let productDetails = await productDetail.findById(productId);
+    console.log("hi");
     if (!productDetails) {
       return res.status(500).json({
         type: "Not Found",
@@ -18,11 +20,11 @@ exports.addItemToCart = async (req, res) => {
 
     if (cart) {
 
-      const indexFound = cart.items.findIndex(item => item.productId.id == productId);
+      const indexFound = cart.items.findIndex(item => item.productId.id === productId);
 
       if (indexFound !== -1 && quantity <= 0) {
         cart.items.splice(indexFound, 1);
-        if (cart.items.length == 0) {
+        if (cart.items.length === 0) {
           cart.subTotal = 0;
         } else {
           cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
@@ -71,7 +73,7 @@ exports.addItemToCart = async (req, res) => {
         subTotal: parseInt(productDetails.price * quantity)
       }
       cart = await cartRepository.addItem(cartData)
-      // let data = await cart.save();
+      //let data = await cart.save();
       res.json(cart);
     }
   } catch (err) {

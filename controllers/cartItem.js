@@ -8,6 +8,5 @@ exports.cart = async () => {
   return carts[0];
 };
 exports.addItem = async payload => {
-  return await Cart.create(payload);
-
+  return Cart.create(payload);
 }

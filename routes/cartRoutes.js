@@ -1,16 +1,6 @@
-const express = require('express');
-
-const cartItemController = require('../controllers/cartController');
-const authController = require('./../controllers/authController');
-
-const router = express.Router();
-
-router
-  .route('/')
-  .post(authController.protect, authController.restrict, cartItemController.createItem);
-
-router
-  .route('/:id')
-  .get(cartItemController.getCart());
-
+const router = require("express").Router();
+const cartController = require("../controllers/cartController");
+router.post("/", cartController.addItemToCart);
+router.get("/", cartController.getCart);
+router.delete("/empty-cart", cartController.emptyCart);
 module.exports = router;

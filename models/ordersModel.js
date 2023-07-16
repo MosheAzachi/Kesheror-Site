@@ -4,7 +4,7 @@ const cartItems = require('./cartModel');
 
 const ordersSchema = new mongoose.Schema({
   orderId: {
-    type: 'number',
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, 'you must have a user in order to start a cart.']
   },
   userId: {
@@ -25,7 +25,6 @@ const ordersSchema = new mongoose.Schema({
 
   }
 });
-
 
 const Orders = mongoose.model('orders', ordersSchema);
 
