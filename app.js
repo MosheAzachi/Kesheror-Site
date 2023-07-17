@@ -10,6 +10,7 @@ const viewRouter = require('./routes/viewRoutes');
 const shopRouter = require('./routes/shopRoutes');
 const userRouter = require('./routes/userRoutes');
 const cartRouter = require('./routes/cartRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 const app = express();
 app.use(cors());
@@ -31,6 +32,7 @@ app.use('/', viewRouter);
 app.use('/api/items', shopRouter);
 app.use('/api/users', userRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/order',orderRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));

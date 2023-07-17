@@ -8,8 +8,8 @@ const ordersSchema = new mongoose.Schema({
     required: [true, 'you must have a user in order to start a cart.']
   },
   userId: {
-    type: 'string',
-    unique : true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref : 'User',
     required: [true, 'you must have a user in order to start a cart.']
   },
   address: {
@@ -20,9 +20,10 @@ const ordersSchema = new mongoose.Schema({
     type: 'string',
     required: [true, 'you must enter a phone number in order to complete your order.']
   },
-  items: {
-    type: Array,
-
+  cart:
+    {
+      type:Object,
+      required: true
   }
 });
 
