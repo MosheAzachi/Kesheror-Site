@@ -66,4 +66,7 @@ body {
   .cart-btn:hover {
     background-color: #0056b3;
   }
-  
+
+  .cartItems img{
+    width: 20%;
+  }

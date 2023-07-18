@@ -39,7 +39,7 @@ exports.addToCart = async (req, res) => {
     await cart.save();
 
 
-    const cartData = JSON.stringify(cart.items);
+    const cartData = JSON.stringify(cart);
     res.cookie('cart', cartData);
 
     res.status(200).json({

@@ -11,7 +11,7 @@
           <b>מחיר: <%= item.price %> ש"ח בלבד</b>
           <div class="center">
             <% if (locals.user) { %>
-              <button class="btn btn-primary btn-block mb-4 itemBtn" onclick="addToCart('<%= locals.user._id %>','<%= item._id %>')">הוסף לסל !</button>
+              <button class="btn btn-primary btn-block mb-4 itemBtn" onclick="addToCart('<%= locals.user._id %>','<%= item._id %>');">הוסף לסל !</button>
             <% } else { %>
               <button class="btn btn-primary btn-block mb-4 itemBtn" onclick="alert('אנא התחבר על מנת להוסיף מוצרים לסל')">הוסף לסל !</button>
             <% } %>
