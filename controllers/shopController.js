@@ -9,13 +9,13 @@ exports.getAllItems = async (req, res) => {
       status: 'success',
       results: items.length,
       data: {
-        items: items,
-      },
+        items: items
+      }
     });
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: err,
+      message: err
     });
   }
 };
@@ -29,13 +29,13 @@ exports.getItem = async (req, res) => {
     res.status(200).json({
       status: 'success',
       data: {
-        item: item,
-      },
+        item: item
+      }
     });
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err,
+      message: err
     });
   }
 };
@@ -45,12 +45,12 @@ exports.createItem = async (req, res) => {
     const newItem = await Item.create(req.body);
     res.status(201).json({
       status: 'success',
-      item: newItem,
+      item: newItem
     });
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err,
+      message: err
     });
   }
 };
@@ -59,18 +59,18 @@ exports.updateItem = async (req, res) => {
   try {
     const newItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     });
     res.status(200).json({
       status: 'success',
       data: {
-        item: newItem,
-      },
+        item: newItem
+      }
     });
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: err,
+      message: err
     });
   }
 };
@@ -80,12 +80,12 @@ exports.deleteItem = async (req, res) => {
     await Item.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: 'success',
-      data: null,
+      data: null
     });
   } catch (err) {
     res.status(404).json({
       status: 'fail',
-      message: err,
+      message: err
     });
   }
 };

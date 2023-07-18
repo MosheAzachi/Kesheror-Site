@@ -7,6 +7,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const viewRouter = require('./routes/viewRoutes');
 const shopRouter = require('./routes/shopRoutes');
 const userRouter = require('./routes/userRoutes');
+const cartRouter = require('./routes/cartRoutes');
 
 const app = express();
 
@@ -26,9 +27,13 @@ app.use(cookieParser());
 app.use('/', viewRouter);
 app.use('/api/items', shopRouter);
 app.use('/api/users', userRouter);
+app.use('/api/cart', cartRouter);
 
 app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));
+  res.status(200).render('notFound', {
+    title: 'עמוד לא נמצא',
+    activePage: req.path
+  });
 });
 
 app.use(globalErrorHandler);
