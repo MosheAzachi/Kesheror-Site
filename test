@@ -1,0 +1,28 @@
+$.ajax({
+          url: 'http://127.0.0.1:4000/api/cart/size',
+          type: 'GET',
+          success: function(cartSizeData) {
+            console.log('Cart size:', cartSizeData.size);
+            var cartQuantityElement = document.getElementById('cartQuantity');
+            if (cartQuantityElement) {
+              cartQuantityElement.innerText = cartSizeData.size.toString();
+            }
+          },
+            error: function(xhr, status, error) {
+              console.log('Error occurred while fetching cart size:', error);
+          }});
+
+/*exports.cartSize= async (req, res) => {
+  try {
+    const { userId } = req.body;
+    let cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return 0;
+    }
+    else
+      return cart.totalProducts;
+  } catch (error) {
+  console.error(error);
+  res.status(500).json({ message: 'Server Error' });
+}
+};*/

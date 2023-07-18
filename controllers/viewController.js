@@ -1,5 +1,6 @@
-const Item = require('../models/productModel');
+const Item = require('../models/itemModel');
 const User = require('./../models/userModel');
+const Cart = require('./../models/cartModel');
 
 exports.getOverview = (req, res) => {
   res.status(200).render('home', {
@@ -48,6 +49,14 @@ exports.getStore = async (req, res, next) => {
   res.status(200).render('store', {
     title: 'חנות',
     items: items,
+    activePage: req.path
+  });
+};
+exports.getCartPage = async (req, res, next) => {
+  const cart = await Cart.findById('64b6b8c9122c68a42037c285');
+  res.status(200).render('cart', {
+    title: 'סל קניות',
+    items: cart.items,
     activePage: req.path
   });
 };

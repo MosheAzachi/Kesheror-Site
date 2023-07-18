@@ -1,130 +1,49 @@
-const cartRepository = require('./cartItem')
-const productDetail = require('../models/productModel');
-const productRepository = require('./shopController');
+const Item = require('../models/itemModel');
+const Cart = require('../models/cartModel');
 
-exports.addItemToCart = async (req, res) => {
-  const {
-    productId
-  } = req.body;
-  const quantity = Number.parseInt(req.body.quantity);
+exports.addToCart = async (req, res) => {
   try {
-    let cart = await cartRepository.cart();
-    let productDetails = await productDetail.findById(productId);
-    console.log("hi");
-    if (!productDetails) {
-      return res.status(500).json({
-        type: "Not Found",
-        msg: "Invalid request"
-      })
+    const { userId, productId, quantity } = req.body;
+
+    const item = await Item.findById(productId);
+
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
     }
 
-    if (cart) {
+    const price = item.price; // Retrieve the price from the item
 
-      const indexFound = cart.items.findIndex(item => item.productId.id === productId);
+    let cart = await Cart.findOne({ userId });
 
-      if (indexFound !== -1 && quantity <= 0) {
-        cart.items.splice(indexFound, 1);
-        if (cart.items.length === 0) {
-          cart.subTotal = 0;
-        } else {
-          cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
-        }
-      }
-      //----------check if product exist,just add the previous quantity with the new quantity and update the total price-------
-      else if (indexFound !== -1) {
-        cart.items[indexFound].quantity = cart.items[indexFound].quantity + quantity;
-        cart.items[indexFound].total = cart.items[indexFound].quantity * productDetails.price;
-        cart.items[indexFound].price = productDetails.price
-        cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
-      }
-      //----Check if Quantity is Greater than 0 then add item to items Array ----
-      else if (quantity > 0) {
-        cart.items.push({
-          productId: productId,
-          quantity: quantity,
-          price: productDetails.price,
-          total: parseInt(productDetails.price * quantity)
-        })
-        cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
-      }
-      //----if quantity of price is 0 throw the error -------
-      else {
-        return res.status(400).json({
-          type: "Invalid",
-          msg: "Invalid request"
-        })
-      }
-      let data = await cart.save();
-      res.status(200).json({
-        type: "success",
-        mgs: "Process Successful",
-        data: data
-      })
-    }
-    //------------ if there is no user with a cart...it creates a new cart and then adds the item to the cart that has been created------------
-    else {
-      const cartData = {
-        items: [{
-          productId: productId,
-          quantity: quantity,
-          total: parseInt(productDetails.price * quantity),
-          price: productDetails.price
-        }],
-        subTotal: parseInt(productDetails.price * quantity)
-      }
-      cart = await cartRepository.addItem(cartData)
-      //let data = await cart.save();
-      res.json(cart);
-    }
-  } catch (err) {
-    console.log(err)
-    res.status(400).json({
-      type: "Invalid",
-      msg: "Something Went Wrong",
-      err: err
-    })
-  }
-}
-exports.getCart = async (req, res) => {
-  try {
-    let cart = await cartRepository.cart()
     if (!cart) {
-      return res.status(400).json({
-        type: "Invalid",
-        msg: "Cart Not Found",
-      })
+      cart = new Cart({ userId, items: [], totalPrice: 0 });
     }
-    res.status(200).json({
-      status: true,
-      data: cart
-    })
-  } catch (err) {
-    console.log(err)
-    res.status(400).json({
-      type: "Invalid",
-      msg: "Something Went Wrong",
-      err: err
-    })
-  }
-}
 
-exports.emptyCart = async (req, res) => {
-  try {
-    let cart = await cartRepository.cart();
-    cart.items = [];
-    cart.subTotal = 0
-    let data = await cart.save();
+    const existingItem = cart.items.find(item => item.productId.equals(productId));
+
+    cart.totalProducts += quantity;
+
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      cart.items.push({ productId, quantity, price }); // Add the price to the cart item
+    }
+
+    // Calculate the total price
+    cart.totalPrice = cart.items.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+
+    await cart.save();
+
+    const cartData = JSON.stringify(cart);
+
+    res.cookie('cart', cartData);
     res.status(200).json({
-      type: "success",
-      mgs: "Cart Has been emptied",
-      data: data
-    })
-  } catch (err) {
-    console.log(err)
-    res.status(400).json({
-      type: "Invalid",
-      msg: "Something Went Wrong",
-      err: err
-    })
+      status: 'success'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
-}
+};

@@ -62,6 +62,20 @@ login = async (email, password) => {
     success: function(data) {
       if (data.status === 'success') {
         alert('התחברת בהצלחה לאתר!');
+        $.ajax({
+          url: 'http://127.0.0.1:4000/api/cart/size',
+          type: 'GET',
+          success: function(cartSizeData) {
+            console.log('Cart size:', cartSizeData.size);
+            var cartQuantityElement = document.getElementById('cartQuantity');
+            if (cartQuantityElement) {
+              cartQuantityElement.innerText = cartSizeData.size.toString();
+            }
+          },
+          error: function(xhr, status, error) {
+            console.log('Error occurred while fetching cart size:', error);
+          }});
+
         window.setTimeout(function() {
           location.assign('/');
         }, 1000);
@@ -271,4 +285,34 @@ updateItem = async (ID, name, price, description, image) => {
       alert(xhr.responseJSON.message);
     }
   });
+
 };
+function showCart() {
+  document.getElementById("cartIcon").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the click event
+    const cartSection = document.getElementById("cartSection");
+    if (cartSection.style.display === "none") {
+      // Make an AJAX request to fetch the cart data
+      // Example using jQuery's $.ajax() function:
+      $.ajax({
+        url: 'http://127.0.0.1:4000/api/cart',
+        method: "GET",
+        success: function(response) {
+          // Handle the successful response
+          // Display the cart data in the cart section
+          cartSection.innerHTML = response;
+          cartSection.style.display = "block";
+        },
+        error: function() {
+          // Handle any error that occurred during the AJAX request
+          console.log("Error occurred while fetching the cart data.");
+        }
+      });
+    } else {
+      cartSection.style.display = "none";
+    }
+    return false;
+  });
+}
+
+

@@ -1,4 +1,4 @@
-const product = require('../models/productModel');
+const product = require('../models/itemModel');
 const APIFeatures = require('./../utils/apiFeatures');
 
 exports.getAllItems = async (req, res) => {

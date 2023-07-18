@@ -10,8 +10,12 @@
     </div>
     <% if (locals.user) { %>
         <div class="shopping">
-            <span class="quantity">0</span>
-            <img src="images/shopping.svg">
+            <a id="cartIcon" href="/cart">
+                <span id="cartQuantity" class="quantity">0</span>
+                <img src="images/shopping.svg">
+            </a>
+            <script src="../js/cart.js"></script>
+            <script src="../js/index.js"></script>
         </div>
     <% } %>
 </nav>

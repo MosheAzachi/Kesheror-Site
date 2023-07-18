@@ -1,6 +1,7 @@
-const router = require("express").Router();
-const cartController = require("../controllers/cartController");
-router.post("/", cartController.addItemToCart);
-router.get("/", cartController.getCart);
-router.delete("/empty-cart", cartController.emptyCart);
+const express = require('express');
+const cartController = require('./../controllers/cartController');
+const router = express.Router();
+router.post('/', cartController.addToCart);
+//router.get('api/cart/size',cartController.cartSize);
+
 module.exports = router;

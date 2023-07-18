@@ -2,6 +2,7 @@ const express = require('express');
 
 const viewController = require('./../controllers/viewController');
 const authController = require('./../controllers/authController');
+const cartController = require('./../controllers/cartController');
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.get('/new-user', viewController.createNewUser);
 router.get('/get-users', viewController.getAllUsers);
 router.get('/get-items', viewController.getAllItems);
 router.get('/get-orders', viewController.getAllOrders);
+router.get('/cart',viewController.getCartPage);
 
 module.exports = router;

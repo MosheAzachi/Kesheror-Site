@@ -5,11 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3918007e-a2ab-4343-9aee-15993b1a7989" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/routes/orderRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/cart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/cart.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/ordersController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/ordersController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/cartController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/cartController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/cartItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/shopController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/shopController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/viewController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/viewController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/cartModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/cartModel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/ordersModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/ordersModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/productModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/itemModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/cartRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/cartRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/userRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/userRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/viewRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/viewRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/_header.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/_header.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/store.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/store.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,14 +72,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="server.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server.js" working-dir="$PROJECT_DIR$">
+    <configuration name="server.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Node.js.server.js" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -81,7 +89,8 @@
       <workItem from="1689250667990" duration="4707000" />
       <workItem from="1689446565184" duration="6940000" />
       <workItem from="1689530957968" duration="10359000" />
-      <workItem from="1689622664649" duration="2547000" />
+      <workItem from="1689622664649" duration="2668000" />
+      <workItem from="1689668881381" duration="30262000" />
     </task>
     <servers />
   </component>
