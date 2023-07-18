@@ -12,6 +12,8 @@ exports.addToCart = async (req, res) => {
     }
 
     const price = item.price; // Retrieve the price from the item
+    const productName = item.productName;
+    const productImage = item.image;
 
     let cart = await Cart.findOne({ userId });
 
@@ -26,7 +28,7 @@ exports.addToCart = async (req, res) => {
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      cart.items.push({ productId, quantity, price }); // Add the price to the cart item
+      cart.items.push({ productId, productName, productImage, quantity, price }); // Add the price to the cart item
     }
 
     // Calculate the total price
@@ -36,11 +38,12 @@ exports.addToCart = async (req, res) => {
 
     await cart.save();
 
-    const cartData = JSON.stringify(cart);
 
+    const cartData = JSON.stringify(cart.items);
     res.cookie('cart', cartData);
+
     res.status(200).json({
-      status: 'success'
+      status: 'success',
     });
   } catch (error) {
     console.error(error);
