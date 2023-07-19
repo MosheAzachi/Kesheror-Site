@@ -229,3 +229,11 @@ body {
   position: absolute;
   padding: 0.4px 9px;
 }
+
+#map {
+  margin-right: 35px;
+}
+
+.btn {
+  background-color: darkred;
+}

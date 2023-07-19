@@ -295,9 +295,9 @@ function contactSend(name, email, description) {
     }),
     success: function(data) {
       if (data.status === 'success') {
-        alert('משתמש נוצר בהצלחה!');
+        alert('טופס יצירת קשר נשלח בהצלחה!');
         window.setTimeout(function() {
-          location.assign('/personal');
+          location.assign('/');
         }, 1000);
       }
     }

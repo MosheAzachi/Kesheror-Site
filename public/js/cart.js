@@ -96,7 +96,7 @@ function initApp(cart) {
       <img src="${value.productImage}">
       <div class="title">שם: ${value.productName}</div>
       <div class="title">כמות: ${value.quantity}</div>
-      <div class="price">מחיר: ${value.price.toLocaleString() * value.quantity}</div>
+      <div class="price">מחיר: ${value.price * value.quantity}</div>
       <button style="color: red" onclick="deleteInCart('${userId}','${value.productId}')">Delete</button>
     `;
 

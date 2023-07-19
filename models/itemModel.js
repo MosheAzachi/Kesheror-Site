@@ -1,24 +1,41 @@
-const mognoose = require('mongoose');
+const mongoose = require('mongoose');
 
-const itemSchema = new mognoose.Schema({
+const itemSchema = new mongoose.Schema({
   image: {
     type: String,
-    required: [true, 'A new item in the shop must have his picture!']
+    required: [true, 'A new item in the shop must have its picture!']
   },
   productName: {
     type: String,
-    required: [true, 'A new item in the shop must have product name!']
+    required: [true, 'A new item in the shop must have a product name!']
   },
   description: {
     type: String,
-    required: [true, 'A new item in the shop must have description!']
+    required: [true, 'A new item in the shop must have a description!']
   },
   price: {
-    type: String,
-    required: [true, 'A new item in the shop must have price!']
+    type: Number,
+    required: [true, 'A new item in the shop must have a price!']
+  },
+  sale: {
+    type: Boolean,
+    required: [true, 'Specify if the item is on sale or not'],
+    default: false
+  },
+  priceAfterSale: {
+    type: Number,
+    default: 0,
+    validate: {
+      validator: function(val) {
+        if (this.sale === true) {
+          return val > 0;
+        }
+      },
+      message: 'Enter price after sale'
+    }
   }
 });
 
-const Item = mognoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', itemSchema);
 
 module.exports = Item;
