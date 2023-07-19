@@ -45,8 +45,12 @@ function toggleCart() {
     return;
   }
 
+<<<<<<< HEAD
   document.querySelector('.totalPrice').innerText = "מחיר כללי: " + cartCookie.totalPrice;
   initApp(cartCookie.items)
+=======
+  initApp(cartCookie.items);
+>>>>>>> ae54774175a6c805c9e821f256168406dca95906
 }
 
 function getCart() {
