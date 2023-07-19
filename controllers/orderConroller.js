@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 exports.addOrder = async (req, res) => {
   try {
     const { userId, address, phone, payment } = req.body;
-    const cart = await Cart.findById(userId);
+    const cart = await Cart.findOne(userId);
     if (!cart) {
       return res.status(404).json({ message: 'cart not found' });
     } else {
