@@ -5,6 +5,10 @@ const ordersSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
+  fullName: {
+    type: String,
+    required: [true, 'you must insert an full name in order to complete your order.']
+  },
   address: {
     type: String,
     required: [true, 'you must insert an address in order to complete your order.']
@@ -12,6 +16,10 @@ const ordersSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: [true, 'you must enter a phone number in order to complete your order.']
+  },
+  payment: {
+    type: String,
+    required: [true, 'you must enter a payment method in order to complete your order.']
   },
   items: [
     {
