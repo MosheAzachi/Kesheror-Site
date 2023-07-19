@@ -1,0 +1,24 @@
+<% extend('base') %>
+
+<div class="block">
+    <% if (locals.user && locals.user.role === 'admin') { %>
+        <h1>טפסי יצירת קשר</h1>
+        <div class="catalog">
+            <% contact.forEach(function(contactOrder) { %>
+                <div class="item">
+                    <div class="adminAlignLeft">
+                        <p>
+                            <b>שם מלא:</b> <%= contactOrder.name %><br>
+                            <b>אימייל:</b> <%= contactOrder.email %><br>
+                            <b>הודעה:</b> <%= contactOrder.description %><br>
+                        </p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <h1>שגיאה</h1>
+        <p>אנא חזור אחורה אינך רשאי לבקר בעמוד זה!</p>
+    <% } %>
+    <hr>
+</div>
