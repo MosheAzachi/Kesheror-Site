@@ -36,17 +36,23 @@ exports.addToCart = async (req, res) => {
       return total + item.price * item.quantity;
     }, 0);
 
-    await cart.save();
+    await Cart.create(cart);
 
-
-    const cartData = JSON.stringify(cart.items);
+    const cartData = JSON.stringify(cart);
     res.cookie('cart', cartData);
 
     res.status(200).json({
-      status: 'success',
+      status: 'success'
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server Error' });
+  }
+};
+exports.deleteMyCart = async (req, res) => {
+  const userId = req.params.id;
+  const cart = await Cart.findOne({ userId });
+  if (cart) {
+    await Cart.findByIdAndDelete(cart._id);
   }
 };

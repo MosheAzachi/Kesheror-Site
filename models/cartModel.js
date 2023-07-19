@@ -15,7 +15,8 @@ const cartSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      productImage: { //Optional
+      productImage: {
+        //Optional
         type: String,
         required: true
       },
@@ -42,4 +43,6 @@ const cartSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Cart', cartSchema);
+const Cart = mongoose.model('Cart', cartSchema);
+
+module.exports = Cart;
