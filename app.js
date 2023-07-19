@@ -29,7 +29,7 @@ app.use('/', viewRouter);
 app.use('/api/items', shopRouter);
 app.use('/api/users', userRouter);
 app.use('/api/cart', cartRouter);
-
+app.use('/api/payment',orderRouter);
 
 app.all('*', (req, res, next) => {
   res.status(200).render('notFound', {

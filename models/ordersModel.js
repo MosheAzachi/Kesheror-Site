@@ -3,27 +3,48 @@ const Item = require('../../Kesheror-Site/models/itemModel');
 const cartItems = require('../../Kesheror-Site/models/cartModel');
 
 const ordersSchema = new mongoose.Schema({
-  orderId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, 'you must have a user in order to start a cart.']
-  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref : 'User',
-    required: [true, 'you must have a user in order to start a cart.']
+    required: true
   },
   address: {
-    type: 'string',
+    type: String,
     required: [true, 'you must insert an address in order to complete your order.']
   },
   phone: {
-    type: 'string',
+    type: String,
     required: [true, 'you must enter a phone number in order to complete your order.']
   },
-  cart: {
-    type:mongoose.Schema.Types.ObjectId,
-    ref: 'cart',
-    required: true
+  items: [
+    {
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+      },
+      productName: {
+        type: String,
+        required: true
+      },
+      quantity: {
+        type: Number,
+        required: true,
+        default: 1
+      },
+      price: {
+        type: Number,
+        required: true
+      }
+    }
+  ],
+  totalPrice: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  totalProducts: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 

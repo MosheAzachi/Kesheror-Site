@@ -5,11 +5,14 @@ const User = require('../models/userModel');
 exports.addOrder = async (req, res) => {
   try {
     const { userId, address, phone, payment } = req.body;
-    const cart = await Cart.findOne(userId);
+    const cart = await Cart.findOne({userId});
     if (!cart) {
       return res.status(404).json({ message: 'cart not found' });
     } else {
-      const order = await Order.create(address, phone, payment, cart);
+      const items = cart.items;
+      const totalPrice = cart.totalPrice;
+      const totalProducts = cart.totalProducts;
+      const order = await Order.create({userId,address, phone, items,totalPrice,totalProducts});
       res.status(200).json({
         message: 'success',
         data: order
@@ -24,7 +27,8 @@ exports.addOrder = async (req, res) => {
 
 exports.getOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id);
+    const userId = req.params.id;
+    const order = await Order.findOne({userId});
     if (!order) {
       return next(new AppError('No user found with that ID', 404));
     }

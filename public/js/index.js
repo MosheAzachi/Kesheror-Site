@@ -290,7 +290,7 @@ if (paymentForm) {
 }
 paymentFunc = async (userId,address,phone,payment) => {
   $.ajax({
-    url: 'http://127.0.0.1:4000/payment',
+    url: 'http://127.0.0.1:4000/api/payment',
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
