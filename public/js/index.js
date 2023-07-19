@@ -95,21 +95,32 @@ if (logOutBtn) {
 if (newItem) {
   document.querySelector('.form').addEventListener('submit', e => {
     e.preventDefault();
+    let onSale;
+    let priceAfter;
+    if (document.getElementById('productOnSale').value === 'true') {
+      console.log('hi');
+      onSale = true;
+      priceAfter = document.getElementById('productPriceOnSale').value;
+    } else {
+      onSale = false;
+    }
     const productImage = document.getElementById('productImage').value;
     const productName = document.getElementById('productName').value;
     const productDescription = document.getElementById('productDescription').value;
     const productPrice = document.getElementById('productPrice').value;
-    createItem(productImage, productName, productDescription, productPrice);
+    createItem(productImage, productName, productDescription, productPrice, onSale, priceAfter);
   });
 }
 
-createItem = async (productImage, productName, productDescription, productPrice) => {
+createItem = async (productImage, productName, productDescription, productPrice, onSale, priceAfter) => {
   $.ajax({
     url: 'http://127.0.0.1:4000/api/items',
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
       image: productImage,
+      sale: onSale,
+      priceAfterSale: priceAfter,
       productName: productName,
       description: productDescription,
       price: productPrice
@@ -302,4 +313,13 @@ function contactSend(name, email, description) {
       }
     }
   });
+}
+
+function togglePriceInputs(value) {
+  const priceInputs = document.getElementById('priceInputs');
+  if (value === 'true') {
+    priceInputs.style.display = 'block';
+  } else {
+    priceInputs.style.display = 'none';
+  }
 }
