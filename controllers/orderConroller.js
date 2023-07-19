@@ -13,6 +13,7 @@ exports.addOrder = async (req, res) => {
       const totalPrice = cart.totalPrice;
       const totalProducts = cart.totalProducts;
       const order = await Order.create({userId,address, phone, items,totalPrice,totalProducts});
+      await Cart.findByIdAndDelete(cart._id);
       res.status(200).json({
         message: 'success',
         data: order
