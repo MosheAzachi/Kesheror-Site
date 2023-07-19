@@ -64,7 +64,3 @@ button {
   border-radius: 8px;
   margin-bottom: 5px;
 }
-
-button:hover {
-  background-color: #ff0000;
-}

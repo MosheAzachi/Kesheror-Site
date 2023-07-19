@@ -234,10 +234,18 @@ body {
   margin-right: 35px;
 }
 
-.btn {
-  background-color: darkred;
-}
-
 #myForm select {
   padding: 5px;
+}
+
+.sale-price {
+  color: red;
+}
+
+.label {
+  position: absolute;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
 }

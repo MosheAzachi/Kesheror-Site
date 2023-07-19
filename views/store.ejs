@@ -12,7 +12,194 @@
         <button class="nav_el" type="submit">הצג</button>
       </form>
     </div>
-    <div class="catalog">
-    </div>
+    <div class="catalog"></div>
     <hr>
   </div>
+
+  <script>
+window.addEventListener('load', function() {
+  const catalog = document.querySelector('.catalog');
+  fetch('/api/items')
+    .then(response => response.json())
+    .then(data => {
+      // Clear previous content
+      catalog.innerHTML = '';
+      // Process the retrieved data and append it to the catalog div
+      data.data.items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item'); // Add a CSS class for styling
+
+        const buttonElement = document.createElement('button');
+        buttonElement.classList.add('btn', 'btn-primary', 'btn-block', 'mb-4', 'itemBtn');
+        buttonElement.textContent = 'הוסף לסל !';
+
+        itemElement.innerHTML = `
+          ${item.sale ? `<span class="label">בהנחה</span>` : ''}
+          <img src="${item.image}" alt="${item.productName}">
+          <h2>${item.productName}</h2>
+          <p>${item.description}</p>
+          <b>מחיר: ${item.price} ש"ח בלבד</b>
+          ${item.sale ? `<b>מחיר לאחר הנחה: <span class="sale-price">${item.priceAfterSale} ש"ח בלבד</span></b>` : ''}
+          <div class="center">
+            <!-- The button element is added dynamically here -->
+          </div>
+        `;
+        const userId = '<%= locals.user ? locals.user._id : "" %>';
+        if (userId) {
+          buttonElement.addEventListener('click', function() {
+            addToCart(userId, `${item._id}`);
+          });
+        } else {
+          buttonElement.addEventListener('click', function() {
+            alert('אנא התחבר על מנת להוסיף מוצרים לסל');
+          });
+        }
+
+        itemElement.querySelector('.center').appendChild(buttonElement);
+        catalog.appendChild(itemElement);
+      });
+    })
+    .catch(error => console.error(error));
+});
+const catalog = document.querySelector('.catalog');
+const form = document.getElementById('myForm');
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
+    const selector = document.getElementById('selector1');
+    const selectedOption = selector.value;
+    if(selectedOption=="option1") {
+      fetch('/api/items?sort=price')
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous content
+        catalog.innerHTML = '';
+
+        // Process the retrieved data and append it to the catalog div
+        data.data.items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item'); // Add a CSS class for styling
+
+        const buttonElement = document.createElement('button');
+        buttonElement.classList.add('btn', 'btn-primary', 'btn-block', 'mb-4', 'itemBtn');
+        buttonElement.textContent = 'הוסף לסל !';
+
+        itemElement.innerHTML = `
+          ${item.sale ? `<span class="label">בהנחה</span>` : ''}
+          <img src="${item.image}" alt="${item.productName}">
+          <h2>${item.productName}</h2>
+          <p>${item.description}</p>
+          <b>מחיר: ${item.price} ש"ח בלבד</b>
+          ${item.sale ? `<b>מחיר לאחר הנחה: <span class="sale-price">${item.priceAfterSale} ש"ח בלבד</span></b>` : ''}
+
+          <div class="center">
+            <!-- The button element is added dynamically here -->
+          </div>
+        `;
+        const userId = '<%= locals.user ? locals.user._id : "" %>';
+        if (userId) {
+          buttonElement.addEventListener('click', function() {
+            addToCart(userId, `${item._id}`);
+          });
+        } else {
+          buttonElement.addEventListener('click', function() {
+            alert('אנא התחבר על מנת להוסיף מוצרים לסל');
+          });
+        }
+
+        itemElement.querySelector('.center').appendChild(buttonElement);
+        catalog.appendChild(itemElement);
+      });
+      })
+      .catch(error => console.error(error));
+  }
+  if(selectedOption=="option2") {
+      fetch('/api/items?sort=-price')
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous content
+        catalog.innerHTML = '';
+
+        // Process the retrieved data and append it to the catalog div
+        data.data.items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item'); // Add a CSS class for styling
+
+        const buttonElement = document.createElement('button');
+        buttonElement.classList.add('btn', 'btn-primary', 'btn-block', 'mb-4', 'itemBtn');
+        buttonElement.textContent = 'הוסף לסל !';
+
+        itemElement.innerHTML = `
+        ${item.sale ? `<span class="label">בהנחה</span>` : ''}
+          <img src="${item.image}" alt="${item.productName}">
+          <h2>${item.productName}</h2>
+          <p>${item.description}</p>
+          <b>מחיר: ${item.price} ש"ח בלבד</b>
+          ${item.sale ? `<b>מחיר לאחר הנחה: <span class="sale-price">${item.priceAfterSale} ש"ח בלבד</span></b>` : ''}
+          <div class="center">
+            <!-- The button element is added dynamically here -->
+          </div>
+        `;
+        const userId = '<%= locals.user ? locals.user._id : "" %>';
+        if (userId) {
+          buttonElement.addEventListener('click', function() {
+            addToCart(userId, `${item._id}`);
+          });
+        } else {
+          buttonElement.addEventListener('click', function() {
+            alert('אנא התחבר על מנת להוסיף מוצרים לסל');
+          });
+        }
+
+        itemElement.querySelector('.center').appendChild(buttonElement);
+        catalog.appendChild(itemElement);
+      });
+      })
+      .catch(error => console.error(error));
+  }
+  if(selectedOption=="option3") {
+      fetch('/api/items?sale=true')
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous content
+        catalog.innerHTML = '';
+        // Process the retrieved data and append it to the catalog div
+        data.data.items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item'); // Add a CSS class for styling
+
+        const buttonElement = document.createElement('button');
+        buttonElement.classList.add('btn', 'btn-primary', 'btn-block', 'mb-4', 'itemBtn');
+        buttonElement.textContent = 'הוסף לסל !';
+
+        itemElement.innerHTML = `
+          ${item.sale ? `<span class="label">בהנחה</span>` : ''}
+          <img src="${item.image}" alt="${item.productName}">
+          <h2>${item.productName}</h2>
+          <p>${item.description}</p>
+          <b>מחיר: ${item.price} ש"ח בלבד</b>
+          ${item.sale ? `<b>מחיר לאחר הנחה: <span class="sale-price">${item.priceAfterSale} ש"ח בלבד</span></b>` : ''}
+          <div class="center">
+            <!-- The button element is added dynamically here -->
+          </div>
+        `;
+        const userId = '<%= locals.user ? locals.user._id : "" %>';
+        if (userId) {
+          buttonElement.addEventListener('click', function() {
+            addToCart(userId, `${item._id}`);
+          });
+        } else {
+          buttonElement.addEventListener('click', function() {
+            alert('אנא התחבר על מנת להוסיף מוצרים לסל');
+          });
+        }
+
+        itemElement.querySelector('.center').appendChild(buttonElement);
+        catalog.appendChild(itemElement);
+      });
+      })
+      .catch(error => console.error(error));
+  }
+});
+  </script>
+
+  <script src="js/store.js"></script>

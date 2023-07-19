@@ -303,10 +303,3 @@ function contactSend(name, email, description) {
     }
   });
 }
-
-const form = document.getElementById('myForm');
-const catalog = document.querySelector('.catalog');
-
-form.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form submission
-});

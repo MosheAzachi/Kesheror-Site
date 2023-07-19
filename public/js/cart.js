@@ -53,7 +53,9 @@ function updateQuantity() {
   const cartCookie = getCart();
 
   if (!cartCookie) {
-    quantitySpan.innerText = '0';
+    if (quantitySpan) {
+      quantitySpan.innerText = '0';
+    }
   } else {
     // Update the content of the span element with the new quantity value
     quantitySpan.innerText = cartCookie.totalProducts;
