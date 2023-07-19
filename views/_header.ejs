@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="login">
         <% if (locals.user) { %>
-            <a class="nav_el nav__el--logout">התנתק</a>
+            <a class="nav_el nav__el--logout" onclick="deleteCart('<%= locals.user._id %>')">התנתק</a>
             <a class="nav_el" href="/personal">אזור אישי</a>
         <%} else { %>
             <a class="nav_el" href="/login">התחברות</a>
