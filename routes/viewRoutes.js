@@ -21,5 +21,6 @@ router.get('/new-user', viewController.createNewUser);
 router.get('/get-users', viewController.getAllUsers);
 router.get('/get-items', viewController.getAllItems);
 router.get('/get-orders', viewController.getAllOrders);
+router.get('/payments', viewController.getPayments);
 
 module.exports = router;

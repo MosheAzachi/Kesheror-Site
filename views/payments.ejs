@@ -1,0 +1,25 @@
+<% extend('base') %>
+
+<div class="block">
+    <h1>השלם הזמנה</h1>
+    <div class="col d-flex justify-content-center">
+        <form class="form form--payment">
+            <div class="form-outline mb-4">
+                <input id="adress" class="form__input form-control" type="text" placeholder="כתובת למשלוח">
+            </div>
+            <div class="form-outline mb-4">
+                <input id="phone" class="form__input form-control" type="text" placeholder="פלאפון">
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">אפשרות תשלום
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">תשלום טלפוני</a></li>
+                    <li><a href="#">תשלום במזומן לשליח</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-primary btn-block mb-4">ביצוע הזמנה</button>
+        </form>
+    </div>
+    <hr>
+</div>

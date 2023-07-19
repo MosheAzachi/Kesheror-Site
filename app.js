@@ -8,6 +8,7 @@ const viewRouter = require('./routes/viewRoutes');
 const shopRouter = require('./routes/shopRoutes');
 const userRouter = require('./routes/userRoutes');
 const cartRouter = require('./routes/cartRoutes');
+const orderRouter = require('./routes/orderRoute');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/', viewRouter);
 app.use('/api/items', shopRouter);
 app.use('/api/users', userRouter);
 app.use('/api/cart', cartRouter);
+app.use('/api/payment', orderRouter);
 
 app.all('*', (req, res, next) => {
   res.status(200).render('notFound', {

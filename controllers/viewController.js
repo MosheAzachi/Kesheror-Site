@@ -106,3 +106,10 @@ exports.getAllOrders = async (req, res) => {
     activePage: req.path
   });
 };
+
+exports.getPayments = (req, res) => {
+  res.status(200).render('payments', {
+    title: 'הזמנה',
+    activePage: req.path
+  });
+};
