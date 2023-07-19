@@ -1,6 +1,7 @@
 const Item = require('./../models/itemModel');
 const User = require('./../models/userModel');
 const Order = require('./../models/ordersModel');
+const Contact = require('./../models/contactModel');
 
 exports.getOverview = (req, res) => {
   res.status(200).render('home', {
@@ -111,6 +112,15 @@ exports.getAllOrders = async (req, res) => {
 exports.getPayments = (req, res) => {
   res.status(200).render('payments', {
     title: 'הזמנה',
+    activePage: req.path
+  });
+};
+
+exports.getContacts = async (req, res) => {
+  const contact = await Contact.find();
+  res.status(200).render('contact-forms', {
+    title: 'טפסי יצירת קשר',
+    contact: contact,
     activePage: req.path
   });
 };

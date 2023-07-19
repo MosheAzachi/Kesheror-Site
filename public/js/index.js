@@ -3,6 +3,7 @@ const logOutBtn = document.querySelector('.nav__el--logout');
 const register = document.querySelector('.form--register');
 const newItem = document.querySelector('.form--newProduct');
 const newUser = document.querySelector('.form--createUser');
+const contact = document.querySelector('.form--contact');
 
 if (register) {
   document.querySelector('.form').addEventListener('submit', e => {
@@ -265,10 +266,40 @@ updateItem = async (ID, name, price, description, image) => {
           location.assign('/get-items');
         }, 1000);
       }
-      console.log(data.status);
     },
     error: function(xhr, status, error) {
       alert(xhr.responseJSON.message);
     }
   });
 };
+
+if (contact) {
+  document.querySelector('.form').addEventListener('submit', e => {
+    e.preventDefault();
+    const contactName = document.getElementById('contactName').value;
+    const contactEmail = document.getElementById('contactEmail').value;
+    const message = document.getElementById('message').value;
+    contactSend(contactName, contactEmail, message);
+  });
+}
+
+function contactSend(name, email, description) {
+  $.ajax({
+    url: 'http://127.0.0.1:4000/api/contact',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      name: name,
+      email: email,
+      description: description
+    }),
+    success: function(data) {
+      if (data.status === 'success') {
+        alert('משתמש נוצר בהצלחה!');
+        window.setTimeout(function() {
+          location.assign('/personal');
+        }, 1000);
+      }
+    }
+  });
+}
