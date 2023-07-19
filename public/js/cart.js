@@ -24,16 +24,14 @@ function updateQuantity() {
   // Get the span element by its class name
   const quantitySpan = document.querySelector('.quantity');
   const cartCookie = getCart();
-  
+
   if (!cartCookie) {
     quantitySpan.innerText = '0';
-  }
-  else{
-  // Update the content of the span element with the new quantity value
-  quantitySpan.innerText = cartCookie.totalProducts;
+  } else {
+    // Update the content of the span element with the new quantity value
+    quantitySpan.innerText = cartCookie.totalProducts;
   }
 }
-
 
 function openCartSlide() {
   const cartSidebar = document.getElementById('cartSidebar');
@@ -42,20 +40,23 @@ function openCartSlide() {
 
 function toggleCart() {
   const cartCookie = getCart();
-  
+
   if (!cartCookie) {
-    return
+    return;
   }
 
-  initApp(cartCookie.items)
+  initApp(cartCookie.items);
 }
 
 function getCart() {
-  const cartCookie = document.cookie.split('; ').find(row => row.startsWith('cart='))?.split('=')[1] || 'null';
+  const cartCookie =
+    document.cookie
+      .split('; ')
+      .find(row => row.startsWith('cart='))
+      ?.split('=')[1] || 'null';
   const cart = JSON.parse(decodeURIComponent(cartCookie));
   return cart;
 }
-
 
 let listCards = [];
 function initApp(items) {
@@ -81,4 +82,21 @@ function deleteAllLiElements() {
   while (ulElement.firstChild) {
     ulElement.removeChild(ulElement.firstChild);
   }
+}
+
+function deleteCart(ID) {
+  $.ajax({
+    url: `http://127.0.0.1:4000/api/cart/${ID}`,
+    type: 'DELETE',
+    success: function(data) {
+      if (!data) {
+        alert('משתמש נמחק בהצלחה!');
+        window.location.reload();
+      }
+      console.log(data.status);
+    },
+    error: function(xhr, status, error) {
+      alert(xhr.responseJSON.message);
+    }
+  });
 }
