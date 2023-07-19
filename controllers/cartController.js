@@ -18,7 +18,6 @@ exports.addToCart = async (req, res) => {
     let cart = await Cart.findOne({ userId });
 
     if (!cart) {
-      console.log(userId);
       cart = new Cart({ userId, items: [], totalPrice: 0 });
     }
 

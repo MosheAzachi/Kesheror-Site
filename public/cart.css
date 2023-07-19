@@ -1,72 +1,42 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    overflow-x: hidden;
-  }
-  
-  .sidebar {
-    position: fixed;
-    top: 0;
-    right: -19%; /* Adjust to quarter page */
-    height: 100%;
-    width: 19%; /* Adjust to quarter page */
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s ease; /* Add transition for slide-in effect */
-  }
-  
-  .sidebar.active {
-    right: 0;
-  }
-  
-  .sidebar h2 {
-    margin-top: 0;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar li {
-    margin-bottom: 10px;
-  }
-  
-  .checkout-btn {
-    display: block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .checkout-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .cart-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 999; /* Ensure it stays above other elements */
-  }
-  
-  .cart-btn:hover {
-    background-color: #0056b3;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
 
-  .cartItems img{
-    width: 20%;
-  }
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -19%; /* Adjust to quarter page */
+  height: 100%;
+  width: 19%; /* Adjust to quarter page */
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease; /* Add transition for slide-in effect */
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar h2 {
+  font-size: 25px;
+  width: 60%;
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+}
+
+.cartItems img {
+  width: 20%;
+}

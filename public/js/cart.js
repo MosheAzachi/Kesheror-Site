@@ -44,9 +44,8 @@ function toggleCart() {
   if (!cartCookie) {
     return;
   }
-
-  document.querySelector('.totalPrice').innerText = "מחיר כללי: " + cartCookie.totalPrice;
-  initApp(cartCookie.items)
+  document.querySelector('.totalPrice').innerText = 'מחיר כללי: ' + cartCookie.totalPrice;
+  initApp(cartCookie.items);
 }
 
 function getCart() {
@@ -70,7 +69,7 @@ function initApp(items) {
       <img src="${value.productImage}">
       <div class="title">שם: ${value.productName}</div>
       <div class="title">כמות: ${value.quantity}</div>
-      <div class="price">מחיר: ${value.price.toLocaleString() * value.quantity}</div>
+  <div class="price">מחיר: ${value.price.toLocaleString() * value.quantity}</div>
       <button onclick="addToCard(${key})">Delete</button>
     `;
 
