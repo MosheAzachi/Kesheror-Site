@@ -49,10 +49,39 @@ exports.addToCart = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
 exports.deleteMyCart = async (req, res) => {
   const userId = req.params.id;
   const cart = await Cart.findOne({ userId });
   if (cart) {
     await Cart.findByIdAndDelete(cart._id);
   }
+};
+
+exports.deleteOneCartItem = async (req, res) => {
+  const userId = req.params.id;
+  const productId = req.body.productId;
+
+  let cart = await Cart.findOne({ userId });
+
+  const existingItem = cart.items.find(item => item.productId.equals(productId));
+  const price = existingItem.price * existingItem.quantity;
+  const quantity = existingItem.quantity;
+
+  const itemIndex = cart.items.findIndex(item => item.productId.equals(productId));
+  cart.items.splice(itemIndex, 1);
+  cart.totalPrice -= price;
+  cart.totalProducts -= quantity;
+
+  if (cart.totalProducts === 0) {
+    await Cart.findByIdAndDelete(cart._id);
+  } else {
+    await cart.save();
+  }
+  const cartData = JSON.stringify(cart);
+  res.cookie('cart', cartData);
+
+  res.status(200).json({
+    status: 'success'
+  });
 };
