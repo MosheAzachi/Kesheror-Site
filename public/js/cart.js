@@ -1,6 +1,6 @@
 window.addEventListener('load', updateQuantity);
 document.getElementById('checkOut').addEventListener('click', function() {
-  window.location.href = '../../views/payment.ejs';
+  window.location.href = '../../payments';
 });
 document.getElementById('goToStore').addEventListener('click', function() {
   window.location.href = '../../store';
