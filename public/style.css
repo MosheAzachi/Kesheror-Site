@@ -237,3 +237,7 @@ body {
 .btn {
   background-color: darkred;
 }
+
+#myForm select {
+  padding: 5px;
+}
