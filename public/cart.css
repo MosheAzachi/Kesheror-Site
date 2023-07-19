@@ -40,3 +40,11 @@ body {
 .cartItems img {
   width: 20%;
 }
+
+/* styles.css */
+
+/* Optional: If you want to remove the default margins and paddings from the <h2> element */
+h2 {
+  margin: 0;
+  padding: 0;
+}
