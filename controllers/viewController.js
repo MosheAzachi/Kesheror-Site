@@ -1,5 +1,6 @@
 const Item = require('./../models/itemModel');
 const User = require('./../models/userModel');
+const Order = require('./../models/ordersModel');
 
 exports.getOverview = (req, res) => {
   res.status(200).render('home', {
@@ -99,10 +100,10 @@ exports.getAllItems = async (req, res) => {
 };
 
 exports.getAllOrders = async (req, res) => {
-  const items = await Item.find();
+  const orders = await Order.find();
   res.status(200).render('orders', {
     title: 'הזמנות',
-    items: items,
+    orders: orders,
     activePage: req.path
   });
 };

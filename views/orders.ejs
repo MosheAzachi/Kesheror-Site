@@ -4,7 +4,32 @@
     <% if (locals.user) { %>
         <% if (locals.user.role === 'admin') { %>
             <h1>הזמנות - אדמין</h1>
-            <p>טקסט</p>
+            <div class="catalog">
+                <% orders.forEach(order => { %>
+                    <div class="item">
+                        <div class="adminAlignLeft">
+                            <p>
+                                <b>כתובת למשלוח:</b>
+                                <%= order.address %> <br />
+                                <b>טלפון למשלוח:</b>
+                                <%= order.phone %> <br />
+                                <% order.items.forEach(orderItem => { %>
+                                    <br />
+                                    <b>שם פריט:</b>
+                                    <%= orderItem.productName %> <br />
+                                    <b>כמות:</b>
+                                    <%= orderItem.quantity %> <br />
+                                <% }); %>
+                                <br />
+                                <b>סה"כ פריטים:</b>
+                                <%= order.totalProducts %> <br />
+                                <b>סה"כ לתשלום:</b>
+                                <%= order.totalPrice %> <br />
+                            </p>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
         <% } else { %>
             <h1>הזמנות - משתמש</h1>
             <p>טקסט</p>
