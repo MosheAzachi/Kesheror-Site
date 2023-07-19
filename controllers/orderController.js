@@ -3,7 +3,8 @@ const Order = require('../models/ordersModel');
 
 exports.addOrder = async (req, res) => {
   try {
-    const { userId, address, phone, payment } = req.body;
+    const { userId,fullName, address, phone, payment } = req.body;
+    console.log(fullName);
     const cart = await Cart.findOne({ userId });
     if (!cart) {
       return res.status(404).json({ message: 'cart not found' });
@@ -11,8 +12,12 @@ exports.addOrder = async (req, res) => {
       const items = cart.items;
       const totalPrice = cart.totalPrice;
       const totalProducts = cart.totalProducts;
-      const order = await Order.create({ userId, address, phone, items, totalPrice, totalProducts });
+      const order = await Order.create({ userId,fullName, address, phone,payment, items, totalPrice, totalProducts });
       await Cart.findByIdAndDelete(cart._id);
+      res.cookie('cart', 'loggedout', {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true
+      });
       res.status(200).json({
         message: 'success',
         data: order
