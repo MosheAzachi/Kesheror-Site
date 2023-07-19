@@ -8,10 +8,18 @@ if (paymentForm) {
     const phone = document.getElementById('phone').value;
     const payment = document.getElementById('selectPayment').value;
     const userId = document.querySelector('#sendOrder').value;
-    paymentFunc(userId,fullName, address, phone, payment);
+    paymentFunc(userId, fullName, address, phone, payment);
   });
 }
-paymentFunc = async (userId,fullName, address, phone, payment) => {
+paymentFunc = async (userId, fullName, address, phone, payment) => {
+  // Phone number validation using regular expression
+  const phonePattern = /^\d+$/; // Only allow digits (0-9)
+
+  if (!phonePattern.test(phone)) {
+    alert('Please enter a valid phone number with only digits (0-9).');
+    return;
+  }
+
   $.ajax({
     url: 'http://127.0.0.1:4000/api/payment',
     type: 'POST',
