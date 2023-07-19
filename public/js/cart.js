@@ -71,7 +71,7 @@ function toggleCart() {
   if (!cartCookie) {
     return;
   }
-  document.querySelector('.totalPrice').innerText = 'מחיר כללי: ' + cartCookie.totalPrice;
+  document.querySelector('.totalPrice').innerText = 'סה"כ: ' + cartCookie.totalPrice + ' ש"ח';
   initApp(cartCookie);
 }
 
@@ -86,7 +86,6 @@ function getCart() {
 }
 
 function initApp(cart) {
-  //products = [{"productId":"649eede18fc280304f3293df","productName":"מקרר","productImage":"images/freezer.png","quantity":7,"price":250,"_id":"64b6ef80e0b7e3c642ed977f"},{"productId":"64b58242a549a827e2986b50","productName":"היי","productImage":"https://res.cloudinary.com/shufersal/image/upload/f_auto,q_auto/v1551800922/prod/product_images/products_zoom/ISA44_Z_P_7290105812315_1.png","quantity":4,"price":200,"_id":"64b6f01afa96f76fb38f960e"},{"productId":"649eecf78fc280304f3293d3","productName":"תנור","productImage":"images/oven.png","quantity":1,"price":600,"_id":"64b6f3eefbdb8dd14b500c4f"}]
   deleteAllLiElements();
   const userId = cart.userId;
   cart.items.forEach((value, key) => {
@@ -96,8 +95,8 @@ function initApp(cart) {
       <img src="${value.productImage}">
       <div class="title">שם: ${value.productName}</div>
       <div class="title">כמות: ${value.quantity}</div>
-      <div class="price">מחיר: ${value.price * value.quantity}</div>
-      <button style="color: red" onclick="deleteInCart('${userId}','${value.productId}')">Delete</button>
+      <div class="price">מחיר: ${value.price * value.quantity} ש"ח</div>
+      <button onclick="deleteInCart('${userId}','${value.productId}')">מחק</button>
     `;
 
     document.querySelector('.cartItems').appendChild(newLi);
