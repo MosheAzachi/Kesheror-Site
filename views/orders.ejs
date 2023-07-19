@@ -9,6 +9,8 @@
                     <div class="item">
                         <div class="adminAlignLeft">
                             <p>
+                                <b>שם מלא:</b>
+                                <%= order.fullName %> <br />
                                 <b>כתובת למשלוח:</b>
                                 <%= order.address %> <br />
                                 <b>טלפון למשלוח:</b>
@@ -21,6 +23,8 @@
                                     <%= orderItem.quantity %> <br />
                                 <% }); %>
                                 <br />
+                                <b>אופן תשלום:</b>
+                                <%= order.payment %> <br />
                                 <b>סה"כ פריטים:</b>
                                 <%= order.totalProducts %> <br />
                                 <b>סה"כ לתשלום:</b>
@@ -32,7 +36,38 @@
             </div>
         <% } else { %>
             <h1>הזמנות - משתמש</h1>
-            <p>טקסט</p>
+            <div class="catalog">
+                <% orders.forEach(order => { %>
+                    <% if (order.userId.equals(locals.user._id)) { %>
+                        <div class="item">
+                            <div class="adminAlignLeft">
+                                <p>
+                                    <b>שם מלא:</b>
+                                    <%= order.fullName %> <br />
+                                    <b>כתובת למשלוח:</b>
+                                    <%= order.address %> <br />
+                                    <b>טלפון למשלוח:</b>
+                                    <%= order.phone %> <br />
+                                    <% order.items.forEach(orderItem => { %>
+                                        <br />
+                                        <b>שם פריט:</b>
+                                        <%= orderItem.productName %> <br />
+                                        <b>כמות:</b>
+                                        <%= orderItem.quantity %> <br />
+                                    <% }); %>
+                                    <br />
+                                    <b>אופן תשלום:</b>
+                                    <%= order.payment %> <br />
+                                    <b>סה"כ פריטים:</b>
+                                    <%= order.totalProducts %> <br />
+                                    <b>סה"כ לתשלום:</b>
+                                    <%= order.totalPrice %> <br />
+                                </p>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
         <% } %>
     <% } else { %>
         <h1>שגיאה</h1>
