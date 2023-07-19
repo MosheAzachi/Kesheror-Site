@@ -1,3 +1,7 @@
+window.addEventListener('load', updateQuantity);
+document.getElementById('checkOut').addEventListener('click', function() {
+  window.location.href = '../../views/payment.ejs';
+});
 function addToCart(userID, itemID) {
   $.ajax({
     url: 'http://127.0.0.1:4000/api/cart',
@@ -18,7 +22,7 @@ function addToCart(userID, itemID) {
   });
 }
 
-window.addEventListener('load', updateQuantity);
+
 
 function updateQuantity() {
   // Get the span element by its class name
@@ -100,3 +104,7 @@ function deleteCart(ID) {
     }
   });
 }
+
+
+
+

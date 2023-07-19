@@ -212,6 +212,9 @@ body {
 .shopping {
   margin-left: 15px;
 }
+.shopping:hover{
+  background: rgb(100, 23, 23);
+}
 
 .shopping img {
   width: 36px;

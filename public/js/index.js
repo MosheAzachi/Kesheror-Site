@@ -288,13 +288,13 @@ if (paymentForm) {
     paymentFunc(locals.user._id,address,phone,payment);
   });
 }
-paymentFunc = async (address,phone,payment) => {
+paymentFunc = async (userId,address,phone,payment) => {
   $.ajax({
-    url: 'http://127.0.0.1:4000/api/users/order',
+    url: 'http://127.0.0.1:4000/payment',
     type: 'POST',
     contentType: 'application/json',
     data: JSON.stringify({
-      userId : locals.userId,
+      userId : userId,
       address: address,
       phone: phone,
       payment: payment
