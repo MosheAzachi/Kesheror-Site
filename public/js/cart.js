@@ -2,6 +2,10 @@ window.addEventListener('load', updateQuantity);
 document.getElementById('checkOut').addEventListener('click', function() {
   window.location.href = '../../views/payment.ejs';
 });
+document.getElementById('goToStore').addEventListener('click', function() {
+  window.location.href = '../../store';
+});
+
 function addToCart(userID, itemID) {
   $.ajax({
     url: 'http://127.0.0.1:4000/api/cart',
@@ -15,6 +19,7 @@ function addToCart(userID, itemID) {
     success: function(data) {
       toggleCart();
       updateQuantity();
+      updateButtonsVisibility();
     },
     error: function(xhr, status, error) {
       alert(xhr.responseJSON.message);
@@ -22,6 +27,25 @@ function addToCart(userID, itemID) {
   });
 }
 
+function updateButtonsVisibility() {
+  const cartItems = document.querySelector(".cartItems");
+  const totalPrice = document.querySelector(".totalPrice");
+  const noItemsMessage = document.getElementById("noItemsMessage");
+  const checkOutBtn = document.getElementById("checkOut");
+  const goToStoreBtn = document.getElementById("goToStore");
+  
+  if (cartItems.children.length === 0) {
+      checkOutBtn.style.display = "none";
+      goToStoreBtn.style.display = "block";
+      totalPrice.style.display = "none";
+      noItemsMessage.style.display = "block";
+  } else {
+      checkOutBtn.style.display = "block";
+      goToStoreBtn.style.display = "none";
+      totalPrice.style.display = "block";
+      noItemsMessage.style.display = "none";
+  }
+}
 
 
 function updateQuantity() {
@@ -74,7 +98,7 @@ function initApp(cart) {
       <div class="title">שם: ${value.productName}</div>
       <div class="title">כמות: ${value.quantity}</div>
       <div class="price">מחיר: ${value.price.toLocaleString() * value.quantity}</div>
-      <button onclick="deleteInCart('${userId}','${value.productId}')">Delete</button>
+      <button style="color: red" onclick="deleteInCart('${userId}','${value.productId}')">Delete</button>
     `;
 
     document.querySelector('.cartItems').appendChild(newLi);
@@ -115,6 +139,7 @@ function deleteInCart(userId, productId) {
       if (data.status === 'success') {
         toggleCart();
         updateQuantity();
+        updateButtonsVisibility();
       }
     },
     error: function(xhr, status, error) {
